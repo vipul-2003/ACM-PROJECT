@@ -22,7 +22,7 @@ int main(void)
     getline(cin, cipher_text);
 
     string key;
-    cout << "Enter the key " << endl;
+    cout << "Enter the key (note :: key must not be repeating)" << endl;
     getline(cin, key);
 
     keyword_decrypt(cipher_text, key);
