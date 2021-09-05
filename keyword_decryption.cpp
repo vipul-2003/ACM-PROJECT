@@ -54,7 +54,7 @@ string decrypt(string key)
         {
             decrypt[i] = char(j);
 
-            for (int k = 0; k < 5; k++)
+            for (int k = 0; k < size; k++)
             {
                 if (decrypt[i] == key[k])
                 {
