@@ -2,7 +2,7 @@
  * @file main.cpp
  * @author VIPUL KUAMR SINGH  (vipulrjput@gmail.com)
  * @brief 
- * THIS IS THE IMPLEMENTATION OF THE DIFFERENT TEXT CRYPTOGRAPHY IN THIS CODE (in c++ language )
+ * THIS IS THE IMPLEMENTATION OF THE DIFFERENT TEXT CRYPTOGRAPHY  (in c++ language )
  * 
  * 1.CEASER CIPHER
  * 2.KEYWORD CIPHER
@@ -17,7 +17,7 @@
  */
 
 /*
-   All header file included in this required to run the programs 
+   All header file included in this required to run the programs  
 */
 #include <iostream>
 #include <stdio.h>
@@ -26,7 +26,7 @@
 
 using namespace std;
 
-void CEASER();
+void CEASER(); //function prototyping 
 void KEYWORD();
 void VERNAM();
 void VEGENERE();
