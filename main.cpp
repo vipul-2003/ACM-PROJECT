@@ -28,11 +28,6 @@
 
 using namespace std;
 
-void CEASER(); //function prototyping 
-void KEYWORD();
-void VERNAM();
-void VEGENERE();
-
 class CRYPTO
 {
 private:
@@ -122,205 +117,98 @@ int main(void)
 
     int ch;
 
-    cout << "-------WELCOME , THERE -------" << endl;
-    cout << " 1. CEASER CIPHER" << endl;
-    cout << " 2. KEYWORD CIPHER" << endl;
-    cout << " 3. VERNAM CIPHER" << endl;
-    cout << " 4. VEGENERE CIPHER" << endl;
-    cout << " 5.        EXIT       " << endl;
-    cout << "  !!! INVALID CHOICE !!!     " << endl;
-    cout << "ENTER THE CHOICE TO GO WITH " << endl;
-    int choice;
+    CRYPTO encryption;
+    CRYPTO decryption;
 
-    cin >> choice;
+    cout << "-------WELCOME , THERE -------" << endl;
+
+    int choice;
 
     while (true)
     {
         /*
-        In while loop , simply we have implemented nested functions choice within choice  
+        In while loop , simply we have implemented  functions choice within choice  
         */
+        cout << " 1. CEASER CIPHER" << endl;
+        cout << " 2. CEASER DECIPHER" << endl;
+        cout << " 3. KEYWORD CIPHER" << endl;
+        cout << " 4. KEYWORD DECIPHER" << endl;
+        cout << " 5. VERNAM CIPHER" << endl;
+        cout << " 6. VERNAM DECIPHER" << endl;
+        cout << " 7. VEGENERE CIPHER" << endl;
+        cout << " 8. VEGENERE DECIPHER" << endl;
+        cout << " 9.        EXIT       " << endl;
+
+        cout << "ENTER THE CHOICE TO GO WITH " << endl;
+
+        cin >> choice;
 
         switch (choice)
         {
         case 1:
-            CEASER();
+            cout << "YOU HAVE SELECTED CEASER CIPHER " << endl;
+            encryption.CeaserEncrpyt(); // function call
+
             break;
 
             /* --------------------------------------------------------------------------------------*/
 
         case 2:
-            KEYWORD();
+            cout << "YOU HAVE SELECTED CEASER DECIPHER" << endl;
+            decryption.CeaserDecrpyt();
+
             break;
 
             /* --------------------------------------------------------------------------------------*/
 
         case 3:
+            cout << "YOU HAVE SELECTED KEYWORD CIPHER" << endl;
+            encryption.KeywordEncrypt();
 
             break;
 
             /* --------------------------------------------------------------------------------------*/
 
         case 4:
+            cout << "YOU HAVE SELECTED KEYWORD DECIPHER" << endl;
+            decryption.KeywordDecrypt();
 
-            VEGENERE();
             break;
 
             /* --------------------------------------------------------------------------------------*/
 
         case 5:
+            cout << "YOU HAVE SELECTED VERNAM CIPHER " << endl;
+            encryption.VernamEncrypt();
+
+            break;
+
+        case 6:
+            cout << "YOU HAVE SELECTED VERNAM DECIPHER " << endl;
+            decryption.VernamDecrypt();
+
+            break;
+
+        case 7:
+            cout << "YOU HAVE SELECTED VEGENERE CIPHER" << endl;
+            encryption.VegenereEncrypt();
+
+            break;
+
+        case 8:
+            cout << "YOU HAVE SELECTED VEGENERE CIPHERR" << endl;
+            decryption.VegenereDecrypt();
+
+            break;
+
+        case 9:
+
             cout << "      ((:  EXITED  :))       " << endl;
             exit(0);
 
-            /* --------------------------------------------------------------------------------------*/
-
         default:
             cout << "  !!! INVALID CHOICE !!!     " << endl;
-
-            /* --------------------------------------------------------------------------------------*/
         }
-    }
-}
-
-/* ------------------------------------------------------------------------------------------------------------*/
-
-void CEASER()
-{
-    int ch; //
-    cout << "YOU HAVE SELECTED CEASER CIPHER " << endl;
-    cout << " 1. CEASER ENCRYPTION " << endl;
-    cout << " 2. CEASER DECRYPTION " << endl;
-    cout << " 3. EXIT  " << endl;
-    cout << "ENTER THE CHOICE TO GO WITH " << endl;
-
-    cin >> ch;
-
-    /* 
-        if entered nested choice(ch ) is not in range of 1-2 then 
-        simply prints the invalid choice 
-    */
-
-    if (ch == 1)
-    {
-        cout << "YOU HAVE SELECTED CEASER ENCRYPTION " << endl;
-        CRYPTO encryption;
-
-        encryption.CeaserEncrpyt(); // function call
-    }
-
-    else if (ch == 2)
-    {
-        cout << "YOU HAVE SELECTED CEASER DECRYPTION " << endl;
-        CRYPTO decryption;
-
-        decryption.CeaserDecrpyt();
-    }
-
-    else
-    {
-        cout << "  !!! INVALID CHOICE !!!     " << endl;
-    }
-}
-
-/* ------------------------------------------------------------------------------------------------------------*/
-
-void KEYWORD()
-{
-    int ch;
-    cout << "YOU HAVE SELECTED KEYWORD CIPHER " << endl;
-    cout << " 1. KEYWORD ENCRYPTION " << endl;
-    cout << " 2. KEYWORD DECRYPTION " << endl;
-    cout << "ENTER THE CHOICE TO GO WITH " << endl;
-
-    cin >> ch;
-
-    if (ch == 1)
-    {
-        cout << "YOU HAVE SELECTED KEYWORD ENCRYPTION " << endl;
-        CRYPTO encryption;
-
-        encryption.KeywordEncrypt();
-    }
-
-    else if (ch == 2)
-    {
-        cout << "YOU HAVE SELECTED KEYWORD DECRYPTION " << endl;
-        CRYPTO decryption;
-
-        decryption.KeywordDecrypt();
-    }
-
-    else
-    {
-        cout << "  !!! INVALID CHOICE !!!     " << endl;
-    }
-}
-
-/* ------------------------------------------------------------------------------------------------------------*/
-
-void VERNAM()
-{
-    int ch;
-
-    cout << "YOU HAVE SELECTED VERNAM CIPHER " << endl;
-    cout << " 1. VERNAM ENCRYPTION " << endl;
-    cout << " 2. VERNAM DECRYPTION " << endl;
-    cout << "ENTER THE CHOICE TO GO WITH " << endl;
-
-    cin >> ch;
-
-    if (ch == 1)
-    {
-        cout << "YOU HAVE SELECTED VERNAM ENCRYPTION " << endl;
-        CRYPTO encryption;
-
-        encryption.VernamEncrypt();
-    }
-
-    else if (ch == 2)
-    {
-        cout << "YOU HAVE SELECTED VERNAM DECRYPTION " << endl;
-        CRYPTO decryption;
-
-        decryption.VernamDecrypt();
-    }
-
-    else
-    {
-        cout << "  !!! INVALID CHOICE !!!     " << endl;
-    }
-}
-
-/* ------------------------------------------------------------------------------------------------------------*/
-
-void VEGENERE()
-{
-    int ch;
-    cout << "YOU HAVE SELECTED VEGENERE CIPHER " << endl;
-    cout << " 1. VEGENERE ENCRYPTION " << endl;
-    cout << " 2. VEGENERE DECRYPTION " << endl;
-    cout << "ENTER THE CHOICE TO GO WITH " << endl;
-
-    cin >> ch;
-
-    if (ch == 1)
-    {
-        cout << "YOU HAVE SELECTED VEGENERE ENCRYPTION " << endl;
-        CRYPTO encryption;
-
-        encryption.VegenereEncrypt();
-    }
-
-    else if (ch == 2)
-    {
-        cout << "YOU HAVE SELECTED VEGENERE DECRYPTION " << endl;
-        CRYPTO decryption;
-
-        decryption.VegenereDecrypt();
-    }
-
-    else
-    {
-        cout << "  !!! INVALID CHOICE !!!     " << endl;
     }
 }
 
@@ -616,6 +504,7 @@ void CRYPTO ::VegenereEncrypt() //function declaration of member function of cla
     {
         CipherText.push_back(char(int((PlainText[i] - 97) + (new_key[i] - 97)) % 26) + 97); // 97 is done to converrt into small letters
     }
+    
     EncryptedDataToDisplay();
 }
 
