@@ -54,7 +54,7 @@ string encrypt(string key)
         {
             encrypt[i] = char(j);
 
-            for (int k = 0; k < 5; k++)
+            for (int k = 0; k < size; k++)
             {
                 if (encrypt[i] == key[k])
                 {
@@ -69,6 +69,11 @@ string encrypt(string key)
 
             ++j;
         }
+    }
+
+    for ( int i = 0 ; i <26 ; i++)
+    {
+        cout <<encrypt[i];
     }
 
     return encrypt;
