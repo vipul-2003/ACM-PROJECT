@@ -4,6 +4,7 @@
  * @file main.cpp
  * @author VIPUL KUAMR SINGH  (vipulrjput@gmail.com)
  * @brief 
+ * The ascii table is used https://www.cs.cmu.edu/~pattis/15-1XX/common/handouts/ascii.html
  * THIS IS THE IMPLEMENTATION OF THE DIFFERENT TEXT CRYPTOGRAPHY  (in c++ language )
  * 
  * 1.CEASER CIPHER
@@ -25,6 +26,7 @@
 #include <stdio.h>
 #include <ctype.h>
 #include <vector>
+#include <string>
 
 using namespace std;
 
@@ -87,6 +89,17 @@ public:
 
     /* --------------------------------------------------------------------------------------*/
 
+    void EmptyString() // this simply helps to delete or empty the string and vector elements
+    {
+        CipherText.clear(); // these two are string 
+        PlainText1.clear();
+
+        PlainText.erase(); // these two are vector 
+        CipherText1.erase();
+    }
+
+    /* --------------------------------------------------------------------------------------*/
+
     void CeaserEncrpyt(); // function prototypes in class which is defined after the main function
     void CeaserDecrpyt();
 
@@ -105,10 +118,10 @@ public:
 
     /* --------------------------------------------------------------------------------------*/
 
-    void VegenereEncrypt();
-    void VegenereDecrypt();
-    string GenerateKey_Vegenere(string plaintext, string key);
-    // this generatekey function helps in key for vegenere key which is used to cipher or decipher the text
+    void VigenereEncrypt();
+    void VigenereDecrypt();
+    string GenerateKey_Vigenere(string plaintext, string key);
+    // this generatekey function helps in key for Vigenere key which is used to cipher or decipher the text
     /* --------------------------------------------------------------------------------------*/
 };
 
@@ -117,7 +130,7 @@ int main(void)
 
     int ch;
 
-    CRYPTO encryption;
+    CRYPTO encryption; // it helps to use the function of class CRYPTO 
     CRYPTO decryption;
 
     cout << "-------WELCOME , THERE -------" << endl;
@@ -135,8 +148,8 @@ int main(void)
         cout << " 4. KEYWORD DECIPHER" << endl;
         cout << " 5. VERNAM CIPHER" << endl;
         cout << " 6. VERNAM DECIPHER" << endl;
-        cout << " 7. VEGENERE CIPHER" << endl;
-        cout << " 8. VEGENERE DECIPHER" << endl;
+        cout << " 7. Vigenere CIPHER" << endl;
+        cout << " 8. Vigenere DECIPHER" << endl;
         cout << " 9.        EXIT       " << endl;
 
         cout << "ENTER THE CHOICE TO GO WITH " << endl;
@@ -190,14 +203,14 @@ int main(void)
             break;
 
         case 7:
-            cout << "YOU HAVE SELECTED VEGENERE CIPHER" << endl;
-            encryption.VegenereEncrypt();
+            cout << "YOU HAVE SELECTED Vigenere CIPHER" << endl;
+            encryption.VigenereEncrypt();
 
             break;
 
         case 8:
-            cout << "YOU HAVE SELECTED VEGENERE CIPHERR" << endl;
-            decryption.VegenereDecrypt();
+            cout << "YOU HAVE SELECTED Vigenere CIPHERR" << endl;
+            decryption.VigenereDecrypt();
 
             break;
 
@@ -241,6 +254,7 @@ void CRYPTO ::CeaserEncrpyt() // function declaration of member function of clas
     }
 
     EncryptedDataToDisplay(); // to display the encrypted message
+    EmptyString();
 }
 
 /* ------------------------------------------------------------------------------------------------------------*/
@@ -271,7 +285,7 @@ void CRYPTO ::CeaserDecrpyt() //function declaration of member function of class
 
         else if (islower(CipherText1[i]))
         {
-            PlainText1.push_back(char(int(CipherText1[i] - new_key - 97) % 26 + 97));
+            PlainText1.push_back(char(int(abs(CipherText1[i] - new_key - 97) % 26 + 97)));
         }
 
         else
@@ -280,6 +294,7 @@ void CRYPTO ::CeaserDecrpyt() //function declaration of member function of class
         }
     }
     DecryptedDataToDisplay();
+    EmptyString();
 }
 /* ------------------------------------------------------------------------------------------------------------*/
 /*
@@ -368,6 +383,7 @@ void CRYPTO ::KeywordEncrypt() //function declaration of member function of clas
     }
 
     EncryptedDataToDisplay();
+    EmptyString();
 }
 
 /* ------------------------------------------------------------------------------------------------------------*/
@@ -412,6 +428,7 @@ void CRYPTO ::KeywordDecrypt()
         }
     }
     DecryptedDataToDisplay();
+    EmptyString();
 }
 
 /* ------------------------------------------------------------------------------------------------------------*/
@@ -440,6 +457,7 @@ void CRYPTO ::VernamEncrypt()
         CipherText.push_back(char(sum));
     }
     EncryptedDataToDisplay();
+    EmptyString();
 }
 
 /* ------------------------------------------------------------------------------------------------------------*/
@@ -461,10 +479,11 @@ void CRYPTO ::VernamDecrypt() //function declaration of member function of class
         PlainText1.push_back(char(sum));
     }
     DecryptedDataToDisplay();
+    EmptyString();
 }
 
 /* ------------------------------------------------------------------------------------------------------------*/
-string CRYPTO ::GenerateKey_Vegenere(string plaintext, string key)
+string CRYPTO ::GenerateKey_Vigenere(string plaintext, string key)
 {
     int size_of_plaintext = plaintext.size() - key.size();
     int j = 0;
@@ -494,27 +513,28 @@ string CRYPTO ::GenerateKey_Vegenere(string plaintext, string key)
 
 /* ------------------------------------------------------------------------------------------------------------*/
 
-void CRYPTO ::VegenereEncrypt() //function declaration of member function of class CRYPT
+void CRYPTO ::VigenereEncrypt() //function declaration of member function of class CRYPT
 {
     GetDataToEncrypt();
 
-    string new_key = GenerateKey_Vegenere(PlainText, key);
+    string new_key = GenerateKey_Vigenere(PlainText, key);
 
     for (int i = 0; i < PlainText.size(); i++)
     {
         CipherText.push_back(char(int((PlainText[i] - 97) + (new_key[i] - 97)) % 26) + 97); // 97 is done to converrt into small letters
     }
-    
+
     EncryptedDataToDisplay();
+    EmptyString();
 }
 
 /* ------------------------------------------------------------------------------------------------------------*/
 
-void CRYPTO ::VegenereDecrypt() //function declaration of member function of class CRYPT
+void CRYPTO ::VigenereDecrypt() //function declaration of member function of class CRYPT
 {
     GetDataToDecrypt();
 
-    string new_key = GenerateKey_Vegenere(CipherText1, key);
+    string new_key = GenerateKey_Vigenere(CipherText1, key);
 
     for (int i = 0; i < CipherText1.size(); i++)
     {
@@ -522,6 +542,7 @@ void CRYPTO ::VegenereDecrypt() //function declaration of member function of cla
     }
 
     DecryptedDataToDisplay();
+    EmptyString();
 }
 
 /* ------------------------------------------------------------------------------------------------------------*/
