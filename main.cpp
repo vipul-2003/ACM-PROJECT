@@ -148,8 +148,8 @@ int main(void)
         cout << " 4. KEYWORD DECIPHER" << endl;
         cout << " 5. VERNAM CIPHER" << endl;
         cout << " 6. VERNAM DECIPHER" << endl;
-        cout << " 7. Vigenere CIPHER" << endl;
-        cout << " 8. Vigenere DECIPHER" << endl;
+        cout << " 7. VIGENERE CIPHER" << endl;
+        cout << " 8. VIGENERE DECIPHER" << endl;
         cout << " 9.        EXIT       " << endl;
 
         cout << "ENTER THE CHOICE TO GO WITH " << endl;
