@@ -83,8 +83,7 @@ public:
         {
             cout << PlainText1[i];
         }
-        cout << "\n \n"
-             << endl;
+        cout <<"\n\n"<<endl;
     }
 
     /* --------------------------------------------------------------------------------------*/
@@ -123,6 +122,11 @@ public:
     string GenerateKey_Vigenere(string plaintext, string key);
     // this generatekey function helps in key for Vigenere key which is used to cipher or decipher the text
     /* --------------------------------------------------------------------------------------*/
+
+    void RailFenceEncrypt(); // function prototypes in class which is defined after the main function
+    void RailFenceDecrypt();
+    
+    /* --------------------------------------------------------------------------------------*/
 };
 
 int main(void)
@@ -150,7 +154,9 @@ int main(void)
         cout << " 6. VERNAM DECIPHER" << endl;
         cout << " 7. VIGENERE CIPHER" << endl;
         cout << " 8. VIGENERE DECIPHER" << endl;
-        cout << " 9.        EXIT       " << endl;
+        cout << " 9. RAIL FENCE CIPHER" << endl;
+        cout << " 10. RAIL FENCE DECIPHER" << endl;
+        cout << " 11.        EXIT       " << endl;
 
         cout << "ENTER THE CHOICE TO GO WITH " << endl;
 
@@ -203,18 +209,28 @@ int main(void)
             break;
 
         case 7:
-            cout << "YOU HAVE SELECTED Vigenere CIPHER" << endl;
+            cout << "YOU HAVE SELECTED VIGENERE CIPHER" << endl;
             encryption.VigenereEncrypt();
 
             break;
 
         case 8:
-            cout << "YOU HAVE SELECTED Vigenere CIPHERR" << endl;
+            cout << "YOU HAVE SELECTED VIGENERE CIPHERR" << endl;
             decryption.VigenereDecrypt();
 
             break;
 
         case 9:
+            cout<<"YOU HAVE SELECTED RAIL FENCE CIPHER"<<endl;
+            encryption.RailFenceEncrypt();
+            break;
+        
+        case 10:
+            cout <<"YOU HAVE SELECTED RAIL FENCE DECIPHER"<<endl;
+            decryption.RailFenceDecrypt();
+            break;
+
+        case 11:
 
             cout << "      ((:  EXITED  :))       " << endl;
             exit(0);
@@ -546,3 +562,161 @@ void CRYPTO ::VigenereDecrypt() //function declaration of member function of cla
 }
 
 /* ------------------------------------------------------------------------------------------------------------*/
+
+void CRYPTO :: RailFenceEncrypt()
+{
+    GetDataToEncrypt();
+
+    int new_key = stoi(key); // to convert string to integer
+
+    int row = new_key; // to represent the no. of rows
+
+    int column = PlainText.length(); // to represent the no. of columns and columns equals to length of plaintext 
+
+    char RailFence[row][column]; 
+
+    for (int i = 0; i < row; i++)
+    {
+        for (int j = 0; j < column; j++)
+        {
+            RailFence[i][j] = '%'; //filling blank space to the rail fence matrix
+        }
+    }
+
+    bool directionChange = false; // used to go downward in the RailFence matrix
+
+    int i = 0; //used for the row
+    int j = 0; //used for the column
+
+    for (int k = 0; k < column; k++)
+    {
+
+        if (i == 0 || i == new_key - 1)
+        {
+            directionChange = !directionChange;
+        }
+
+        RailFence[i][j] = PlainText[k];
+
+        if (directionChange == false)
+        {
+            --i;
+        }
+        else
+        {
+            ++i;
+        }
+        j++; //always increase the column in the RailFence
+    }
+
+    for (int i = 0; i < row; i++)
+    {
+        for (int j = 0; j < column; j++)
+        {
+            if (RailFence[i][j] != '%')
+            {
+                CipherText.push_back(RailFence[i][j]);
+            }
+        }
+    }
+
+    EncryptedDataToDisplay();
+    EmptyString();
+}
+
+/* ------------------------------------------------------------------------------------------------------------*/
+
+void CRYPTO :: RailFenceDecrypt()
+{
+    GetDataToDecrypt();
+
+    int new_key = stoi(key);
+
+    int row = new_key;
+
+    int column = CipherText1.length();
+
+    char RailFence[row][column];
+
+    for (int i = 0; i < row; i++)
+    {
+        for (int j = 0; j < column; j++)
+        {
+            RailFence[i][j] = '_'; //filling blank space to the rail fence matrix
+        }
+    }
+    
+  
+    bool directionChange = false; // used to go downward in the RailFence matrix
+
+    int i = 0; //used for the row
+    int j = 0; //used for the column
+
+    for (int k = 0; k < column; k++)
+    {
+
+        if (i == 0 || i == new_key - 1)
+        {
+            directionChange = !directionChange;
+        }
+
+        RailFence[i][j] = '*';
+
+        if (directionChange == false)
+        {
+            --i;
+        }
+        else
+        {
+            ++i;
+        }
+        j++; //always increase the column in the RailFence
+    }
+    
+  
+    int k = 0;
+    while (k < CipherText1.length())
+    {
+        for (int i = 0; i < row; i++)
+        {
+            for (int j = 0; j < column; j++)
+            {
+                if (RailFence[i][j] == '*')
+                {
+                    RailFence[i][j] = CipherText1[k];
+                    k++;
+                }
+            }
+        }
+    }
+    
+ 
+ directionChange = false ; // set direction to false as  it changes at first and last row 
+i = 0 , j = 0; // to move with in matrix 
+    for (int k = 0; k < column; k++)
+    {
+
+        if (i == 0 || i == new_key - 1)
+        {
+            directionChange = !directionChange;
+        }
+
+        PlainText1.push_back(RailFence[i][j]);
+
+        if (directionChange == false)
+        {
+            --i;
+        }
+        else
+        {
+            ++i;
+        }
+        j++; //always increase the column in the RailFence
+    }
+    DecryptedDataToDisplay();
+    EmptyString();
+}
+/* ------------------------------------------------------------------------------------------------------------*/
+
+
+//vpluasnhiukmrig

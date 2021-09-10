@@ -1,3 +1,5 @@
+
+
 #include <stdio.h>
 #include <iostream>
 
@@ -45,8 +47,7 @@ string RailFenceDecipher(string CipherText1, string key)
             RailFence[i][j] = '_'; //filling blank space to the rail fence matrix
         }
     }
-    
-  
+
     bool directionChange = false; // used to go downward in the RailFence matrix
 
     int i = 0; //used for the row
@@ -72,8 +73,7 @@ string RailFenceDecipher(string CipherText1, string key)
         }
         j++; //always increase the column in the RailFence
     }
-    
-  
+
     int k = 0;
     while (k < CipherText1.length())
     {
@@ -89,10 +89,10 @@ string RailFenceDecipher(string CipherText1, string key)
             }
         }
     }
-    
- 
-/***********************************************************************************************/ 
-i = 0 , j = 0;
+
+    /***********************************************************************************************/
+    directionChange = false;
+    i = 0, j = 0;
     for (int k = 0; k < column; k++)
     {
 
@@ -113,5 +113,6 @@ i = 0 , j = 0;
         }
         j++; //always increase the column in the RailFence
     }
+
     return PlainText1;
 }
