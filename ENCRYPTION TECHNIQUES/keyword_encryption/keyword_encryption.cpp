@@ -71,10 +71,7 @@ string encrypt(string key)
         }
     }
 
-    for ( int i = 0 ; i <26 ; i++)
-    {
-        cout <<encrypt[i];
-    }
+  
 
     return encrypt;
 }
