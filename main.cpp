@@ -83,17 +83,18 @@ public:
         {
             cout << PlainText1[i];
         }
-        cout <<"\n\n"<<endl;
+        cout << "\n\n"
+             << endl;
     }
 
     /* --------------------------------------------------------------------------------------*/
 
     void EmptyString() // this simply helps to delete or empty the string and vector elements
     {
-        CipherText.clear(); // these two are string 
+        CipherText.clear(); // these two are string
         PlainText1.clear();
 
-        PlainText.erase(); // these two are vector 
+        PlainText.erase(); // these two are vector
         CipherText1.erase();
     }
 
@@ -125,7 +126,7 @@ public:
 
     void RailFenceEncrypt(); // function prototypes in class which is defined after the main function
     void RailFenceDecrypt();
-    
+
     /* --------------------------------------------------------------------------------------*/
 };
 
@@ -134,7 +135,7 @@ int main(void)
 
     int ch;
 
-    CRYPTO encryption; // it helps to use the function of class CRYPTO 
+    CRYPTO encryption; // it helps to use the function of class CRYPTO
     CRYPTO decryption;
 
     cout << "-------WELCOME , THERE -------" << endl;
@@ -221,12 +222,12 @@ int main(void)
             break;
 
         case 9:
-            cout<<"YOU HAVE SELECTED RAIL FENCE CIPHER"<<endl;
+            cout << "YOU HAVE SELECTED RAIL FENCE CIPHER" << endl;
             encryption.RailFenceEncrypt();
             break;
-        
+
         case 10:
-            cout <<"YOU HAVE SELECTED RAIL FENCE DECIPHER"<<endl;
+            cout << "YOU HAVE SELECTED RAIL FENCE DECIPHER" << endl;
             decryption.RailFenceDecrypt();
             break;
 
@@ -327,6 +328,8 @@ string CRYPTO ::GenerateKey(string key)
 {
     bool array[26] = {false};
 
+    int j; // IT IS USED FOR CHANGING THE VALUE IF MESSAGE IS IN UPPER CASE OR IN LOWER CASE
+
     char encrypt[26];
     int size = key.length(); // used to get the length of the string :: key
 
@@ -339,7 +342,7 @@ string CRYPTO ::GenerateKey(string key)
         }
     }
 
-    int j = 97;
+    isupper(encrypt[0]) ? j = 65 : j = 97;
 
     for (int i = size; i < 26; i++)
     {
@@ -460,16 +463,19 @@ void CRYPTO ::VernamEncrypt()
     GetDataToEncrypt();
 
     int sum = 0;
+      
+    int j = 0 ;
 
     for (int i = 0; i < PlainText.size(); i++)
     {
-        sum = ((PlainText[i] - 97) + (key[i] - 97));
+        isupper(PlainText[i])? j = 65 : j = 97; 
+        sum = ((PlainText[i] - j) + (key[i] - j));
 
         if (sum > 26)
         {
             sum -= 26;
         }
-        sum += 97;
+        sum += j;
         CipherText.push_back(char(sum));
     }
     EncryptedDataToDisplay();
@@ -482,16 +488,18 @@ void CRYPTO ::VernamDecrypt() //function declaration of member function of class
 {
     GetDataToDecrypt();
     int sum = 0;
+    int j = 0 ;
 
     for (int i = 0; i < CipherText1.size(); i++)
     {
-        sum = ((CipherText1[i] - 97) - (key[i] - 97));
+        isupper(PlainText[i])? j = 65 : j = 97;
+        sum = ((CipherText1[i] - j) - (key[i] - j));
 
         if (sum < 0)
         {
             sum += 26;
         }
-        sum += 97;
+        sum += j;
         PlainText1.push_back(char(sum));
     }
     DecryptedDataToDisplay();
@@ -535,9 +543,14 @@ void CRYPTO ::VigenereEncrypt() //function declaration of member function of cla
 
     string new_key = GenerateKey_Vigenere(PlainText, key);
 
+    int j = 0;
+
     for (int i = 0; i < PlainText.size(); i++)
     {
-        CipherText.push_back(char(int((PlainText[i] - 97) + (new_key[i] - 97)) % 26) + 97); // 97 is done to converrt into small letters
+
+        isupper(PlainText[i])? j = 65 : j = 97;
+    
+        CipherText.push_back(char(int((PlainText[i] - j) + (new_key[i] - j)) % 26) + j); // j is done to converrt into small letters
     }
 
     EncryptedDataToDisplay();
@@ -551,10 +564,13 @@ void CRYPTO ::VigenereDecrypt() //function declaration of member function of cla
     GetDataToDecrypt();
 
     string new_key = GenerateKey_Vigenere(CipherText1, key);
+        int j = 0;
+        
 
     for (int i = 0; i < CipherText1.size(); i++)
     {
-        PlainText1.push_back(char(int((CipherText1[i] - 97) - (new_key[i] - 97)) % 26) + 97); // 97 is done to converrt into small letters
+        isupper(CipherText1[i])? j = 65 : j = 97;
+        PlainText1.push_back(char(int((CipherText1[i] - j) - (new_key[i] - j)) % 26) + j); // j  is done to converrt into small letters
     }
 
     DecryptedDataToDisplay();
@@ -563,7 +579,7 @@ void CRYPTO ::VigenereDecrypt() //function declaration of member function of cla
 
 /* ------------------------------------------------------------------------------------------------------------*/
 
-void CRYPTO :: RailFenceEncrypt()
+void CRYPTO ::RailFenceEncrypt()
 {
     GetDataToEncrypt();
 
@@ -571,9 +587,9 @@ void CRYPTO :: RailFenceEncrypt()
 
     int row = new_key; // to represent the no. of rows
 
-    int column = PlainText.length(); // to represent the no. of columns and columns equals to length of plaintext 
+    int column = PlainText.length(); // to represent the no. of columns and columns equals to length of plaintext
 
-    char RailFence[row][column]; 
+    char RailFence[row][column];
 
     for (int i = 0; i < row; i++)
     {
@@ -626,7 +642,7 @@ void CRYPTO :: RailFenceEncrypt()
 
 /* ------------------------------------------------------------------------------------------------------------*/
 
-void CRYPTO :: RailFenceDecrypt()
+void CRYPTO ::RailFenceDecrypt()
 {
     GetDataToDecrypt();
 
@@ -645,8 +661,7 @@ void CRYPTO :: RailFenceDecrypt()
             RailFence[i][j] = '_'; //filling blank space to the rail fence matrix
         }
     }
-    
-  
+
     bool directionChange = false; // used to go downward in the RailFence matrix
 
     int i = 0; //used for the row
@@ -672,8 +687,7 @@ void CRYPTO :: RailFenceDecrypt()
         }
         j++; //always increase the column in the RailFence
     }
-    
-  
+
     int k = 0;
     while (k < CipherText1.length())
     {
@@ -689,10 +703,9 @@ void CRYPTO :: RailFenceDecrypt()
             }
         }
     }
-    
- 
- directionChange = false ; // set direction to false as  it changes at first and last row 
-i = 0 , j = 0; // to move with in matrix 
+
+    directionChange = false; // set direction to false as  it changes at first and last row
+    i = 0, j = 0;            // to move with in matrix
     for (int k = 0; k < column; k++)
     {
 
@@ -717,4 +730,3 @@ i = 0 , j = 0; // to move with in matrix
     EmptyString();
 }
 /* ------------------------------------------------------------------------------------------------------------*/
-

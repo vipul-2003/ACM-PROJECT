@@ -34,6 +34,8 @@ string decrypt(string key)
 {
     bool array[26] = {false};
 
+    int j ;
+
     char decrypt[26];
     int size = key.length(); // used to get the length of the string :: key
 
@@ -46,7 +48,7 @@ string decrypt(string key)
         }
     }
 
-    int j = 97;
+     isupper(decrypt[0]) ? j = 65 : j= 97;
 
     for (int i = size; i < 26; i++)
     {

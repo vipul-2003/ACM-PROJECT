@@ -30,16 +30,19 @@ void vernam_decrypt(string ciphertext, string key)
     string cipher_text;
 
     int sum = 0 ;
+    
+    int j = 0 ;
 
     for (int i = 0; i < ciphertext.size(); i++)
     {
-        sum = ((ciphertext[i] - 97) - (key[i] - 97) );
+        isupper(ciphertext[i])? j = 65 : j = 97; 
+        sum = ((ciphertext[i] - j) - (key[i] - j) );
 
         if (sum < 0) 
         {
             sum += 26;
         }
-        sum += 97 ;
+        sum += j ;
         cipher_text +=char(sum);
 
     }

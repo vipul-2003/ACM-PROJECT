@@ -16,16 +16,16 @@ int keyword_encrypt(string, string);
 
 int main(void)
 {
-    cout << "Enter the message to decrypt " << endl;
-    string cipher_text;
+    cout << "Enter the message to encrypt " << endl;
+    string plain_text;
 
-    getline(cin, cipher_text);
+    getline(cin, plain_text);
 
     string key;
     cout << "Enter the key " << endl;
     getline(cin, key);
 
-    keyword_encrypt(cipher_text, key);
+    keyword_encrypt(plain_text, key);
 
     return 0;
 }
@@ -33,6 +33,7 @@ int main(void)
 string encrypt(string key)
 {
     bool array[26] = {false};
+     int j ;
 
     char encrypt[26];
     int size = key.length(); // used to get the length of the string :: key
@@ -46,7 +47,7 @@ string encrypt(string key)
         }
     }
 
-    int j = 97;
+   isupper(encrypt[0]) ? j = 65 : j = 97;
 
     for (int i = size; i < 26; i++)
     {
