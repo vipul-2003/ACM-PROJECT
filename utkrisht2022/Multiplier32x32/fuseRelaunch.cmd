@@ -1,0 +1,1 @@
+-intstyle "ise" -incremental -lib "secureip" -o "E:/Xilinx/Multiplier32x32/Multiplier32x32_isim_beh.exe" -prj "E:/Xilinx/Multiplier32x32/Multiplier32x32_beh.prj" "work.Multiplier32x32" 
